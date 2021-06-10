@@ -9,6 +9,15 @@ import { getIPAddress } from './utils'
 
 const app = new Koa()
 
+app.on('error', (err, ctx) => {
+  if (ctx) {
+    ctx.body = {
+      status: 9999,
+      message: `程序运行时报错：${err.message}`,
+    }
+  }
+})
+
 /**
  * 使用中间件
  */

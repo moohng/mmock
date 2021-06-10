@@ -1,5 +1,8 @@
 import cors from '@koa/cors'
 import koaBody from 'koa-bodyparser'
+import response from './response'
+import error from './error'
+import log from './log'
 import router from '../router'
 
 /**
@@ -16,11 +19,18 @@ const mdCors = cors({
  */
 const mdKoaBody = koaBody({
   enableTypes: ['json', 'form', 'text', 'xml'],
-  formLimit: '56kb',
-  jsonLimit: '1mb',
-  textLimit: '1mb',
-  strict: true,
 })
+
+/**
+ * 请求日志
+ */
+const mdLogger = log()
+
+/**
+ * 统一返回
+ */
+const mdResponseHandler = response()
+const mdErrorHandler = error()
 
 /**
  * 路由模块
@@ -31,6 +41,9 @@ const mdRouterAllowed = router.allowedMethods()
 export default [
   mdCors,
   mdKoaBody,
+  mdLogger,
+  mdResponseHandler,
+  mdErrorHandler,
   mdRoute,
   mdRouterAllowed,
 ]

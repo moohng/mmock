@@ -9,7 +9,7 @@ export interface Route {
 
 const routes: Route[] = [
   {
-    path: '/erp/invoice/brand/getInvoiceInfoByWorkId',
+    path: '/erp/invoice/brand/getInvoiceInfoByWorkId/:uid',
     method: 'post',
     controller: invoice.detail,
   },
