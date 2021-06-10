@@ -31,15 +31,15 @@ const log: () => Middleware = () => {
     if (flag) {
       const { status, params } = ctx
       const data = {
-        method,
         path,
-        origin,
+        method,
+        params,
         query,
         body,
+        origin,
         ip,
         headers,
         status,
-        params,
         result: ctx.body || 'no content',
       }
       if (ctx.body.status !== 200) {
